@@ -9,7 +9,7 @@ def recolectar():
     manita=pyautogui.locateOnScreen('seleccion.png',confidence=0.9,region=(0,0,794,558))
     time.sleep(0.4)
     if manita is None:
-        pass
+        CapitanMiau()
     else:
 
         manita_pos=pyautogui.center(manita)
@@ -67,6 +67,7 @@ def Atras():
     recolectar()
     pyautogui.click(360,290,button='right')
     talar()
+
 
 
 for i in range(2):#8
