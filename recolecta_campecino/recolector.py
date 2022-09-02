@@ -47,53 +47,58 @@ def CapitanMiau():
     
 
 #movimientos
-def abajo():
-    pyautogui.click(360,310,button='right')
+def Derecha():
+    pyautogui.click(360,330,button='right')
     recolectar()
-    pyautogui.click(360,310,button='right')
+    pyautogui.click(360,330,button='right')
     talar()
-def derecha(): 
-    pyautogui.click(430,310,button='right')
+def Izqierda(): 
+    pyautogui.click(445,290,button='right')
     recolectar()
-    pyautogui.click(430,310,button='right')
+    pyautogui.click(445,290,button='right')
     talar()
-def arriba(): 
-    pyautogui.click(430,270,button='right')
+def Adelante(): 
+    pyautogui.click(445,330,button='right')
     recolectar()
-    pyautogui.click(430,270,button='right')
+    pyautogui.click(445,330,button='right')
+    talar()
+def Atras(): 
+    pyautogui.click(360,290,button='right')
+    recolectar()
+    pyautogui.click(360,290,button='right')
     talar()
 
 
-for i in range(5):#8
+for i in range(2):#8
 #ida
     
     for j in range(3):
-        abajo()
-        derecha()
+        Derecha()
+        Adelante()
         pyautogui.click(centroX-50,centroY+30,button='left')
         time.sleep(0.6)
-    abajo() 
-    derecha()
+    Derecha()
+    Adelante()
     pyautogui.click(centroX+50,centroY+30,button='left') 
     time.sleep(0.6)
-    abajo() 
-    derecha()
+    Derecha()
+    Adelante()
     pyautogui.click(centroX+50,centroY+30,button='left') 
     time.sleep(0.6)
-    abajo() 
+    Derecha()
     
     for j in range(3):
-        arriba()
-        derecha()
+        Izqierda()
+        Adelante()
         pyautogui.click(centroX+50,centroY-30,button='left')
         time.sleep(0.6)
-    arriba()
-    derecha() 
+    Izqierda()
+    Adelante()
     pyautogui.click(centroX+50,centroY+30,button='left')
     time.sleep(0.6)
-    arriba()
-    derecha() 
+    Izqierda()
+    Adelante() 
     pyautogui.click(centroX+50,centroY+30,button='left')
     time.sleep(0.6)
-    arriba() 
+    Izqierda() 
     
