@@ -5,10 +5,12 @@ centro=[400,300]
 
 direcciones ={
     "adelante":[445,330],
+    "adelante2" : [495,360],
     "atras":[360,290],
     "derecha":[360,330],
-    "dercha2" : [310,360]
-    "izquierda":[445,290]
+    "derecha2" : [310,360],
+    "izquierda":[445,290],
+    "izquierda2":[495,260]
 }
 
 semilla='amanita.png'
@@ -64,6 +66,14 @@ for j in range(3):
     moverse(direcciones.get('derecha2'))
     time.sleep(1)
     sembrando(2,'derecha',contador_sembrado)   
-   
+moverse(direcciones.get('adelante2'))   
+sembrando(2,'derecha',contador_sembrado) 
+moverse(direcciones.get('adelante2'))
+sembrando(2,'derecha',contador_sembrado) 
+for j in range(3):
+    moverse(direcciones.get('izquierda2'))
+    time.sleep(1)
+    sembrando(2,'izquierda',contador_sembrado) 
 
+  
 pyautogui.click(centro[0],centro[1],button='right')
