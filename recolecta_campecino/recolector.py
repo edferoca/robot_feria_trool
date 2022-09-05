@@ -13,7 +13,6 @@ def recolectar():
     else:
 
         manita_pos=pyautogui.center(manita)
-        print("recolectar",manita_pos)
         pyautogui.moveTo(manita_pos)
         pyautogui.click(button='left')
         time.sleep(2.9)
@@ -43,6 +42,8 @@ def CapitanMiau():
     else:
         pywhatkit.sendwhatmsg_instantly("+34611131367", "hello", 15, True, 4)
         paso=input("presione 1 si ya paso:")   
+        time.sleep(5)
+    
                
     
 
@@ -52,7 +53,7 @@ def Derecha():
     recolectar()
     pyautogui.click(360,330,button='right')
     talar()
-def Izqierda(): 
+def     Izquierda(): 
     pyautogui.click(445,290,button='right')
     recolectar()
     pyautogui.click(445,290,button='right')
@@ -68,38 +69,35 @@ def Atras():
     pyautogui.click(360,290,button='right')
     talar()
 
-
-
-for i in range(2):#8
-#ida
-    
-    for j in range(3):
+#acciones
+def ejecutar_accion(x,y,direccion):
+    if direccion == "ida":
         Derecha()
         Adelante()
-        pyautogui.click(centroX-50,centroY+30,button='left')
+        pyautogui.click(centroX+x,centroY+y,button='left')
         time.sleep(0.6)
-    Derecha()
-    Adelante()
-    pyautogui.click(centroX+50,centroY+30,button='left') 
-    time.sleep(0.6)
-    Derecha()
-    Adelante()
-    pyautogui.click(centroX+50,centroY+30,button='left') 
-    time.sleep(0.6)
+    elif direccion == "vuelta":
+        Izquierda()
+        Adelante()
+        pyautogui.click(centroX+x,centroY+y,button='left')
+        time.sleep(0.6)
+
+    
+ejecutar_accion(-50,30,"ida")
+Izquierda()
+for i in range(2):#5,5
+#ida    
+    for j in range(3):
+        ejecutar_accion(-50,30,"ida")
+    ejecutar_accion(50,30,"ida")
+    ejecutar_accion(50,30,"ida")
     Derecha()
     
     for j in range(3):
-        Izqierda()
-        Adelante()
-        pyautogui.click(centroX+50,centroY-30,button='left')
-        time.sleep(0.6)
-    Izqierda()
-    Adelante()
-    pyautogui.click(centroX+50,centroY+30,button='left')
-    time.sleep(0.6)
-    Izqierda()
-    Adelante() 
-    pyautogui.click(centroX+50,centroY+30,button='left')
-    time.sleep(0.6)
-    Izqierda() 
-    
+        ejecutar_accion(50,-30,"vuelta")
+    ejecutar_accion(50,30,"vuelta")
+    ejecutar_accion(50,30,"vuelta")
+    Izquierda()
+
+    print(f"vualta: {i+1}")
+print("tarea termianda")
