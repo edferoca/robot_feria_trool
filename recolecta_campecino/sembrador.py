@@ -7,6 +7,7 @@ direcciones ={
     "adelante":[445,330],
     "atras":[360,290],
     "derecha":[360,330],
+    "dercha2" : [310,360]
     "izquierda":[445,290]
 }
 
@@ -54,15 +55,15 @@ pyautogui.click(centro[0],centro[1],button='right')
 pyautogui.press('6')
 
 sembrando(2,'derecha',contador_sembrado)
-pyautogui.click(centro[0],centro[1],button='right')
+moverse(direcciones.get('derecha2'))
+time.sleep(1)
+sembrando(3,'derecha',contador_sembrado)
 print("pase por aqui")
+
 for j in range(3):
-    pyautogui.press('6')
-    time.sleep(0.4)
-    pyautogui.click(direcciones.get('derecha')[0],direcciones.get('derecha')[1],button='left')
-    time.sleep(0.7)
-    pyautogui.press('6')
-    sembrando(3,'derecha',contador_sembrado)    
+    moverse(direcciones.get('derecha2'))
+    time.sleep(1)
+    sembrando(2,'derecha',contador_sembrado)   
    
 
 pyautogui.click(centro[0],centro[1],button='right')
