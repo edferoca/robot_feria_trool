@@ -24,7 +24,7 @@ def moverse(direccion):
 def sembrado(direccion):
     pyautogui.moveTo(direccion[0],direccion[1])
     time.sleep(1)
-    confirmacion=pyautogui.locateOnScreen(semilla,confidence=0.7,region=(0,0,800,600))
+    confirmacion=pyautogui.locateOnScreen(semilla,confidence=0.5,region=(0,0,800,600))
     time.sleep(0.4)
     if confirmacion is None:
             sembrado=0
@@ -61,19 +61,26 @@ moverse(direcciones.get('derecha2'))
 time.sleep(1)
 sembrando(3,'derecha',contador_sembrado)
 print("pase por aqui")
-
+for i in range(2): #4
+    for j in range(3):
+        moverse(direcciones.get('derecha2'))
+        time.sleep(1)
+        sembrando(2,'derecha',contador_sembrado)   
+    moverse(direcciones.get('adelante2'))   
+    sembrando(2,'derecha',contador_sembrado) 
+    moverse(direcciones.get('adelante2'))
+    sembrando(3,'derecha',contador_sembrado) 
+    for j in range(3):
+        moverse(direcciones.get('izquierda2'))
+        time.sleep(1)
+        sembrando(2,'izquierda',contador_sembrado) 
+    moverse(direcciones.get('adelante2'))   
+    sembrando(2,'izquierda',contador_sembrado)
+    moverse(direcciones.get('adelante2')) 
+    sembrando(3,'derecha',contador_sembrado)
 for j in range(3):
-    moverse(direcciones.get('derecha2'))
-    time.sleep(1)
-    sembrando(2,'derecha',contador_sembrado)   
-moverse(direcciones.get('adelante2'))   
-sembrando(2,'derecha',contador_sembrado) 
-moverse(direcciones.get('adelante2'))
-sembrando(2,'derecha',contador_sembrado) 
-for j in range(3):
-    moverse(direcciones.get('izquierda2'))
-    time.sleep(1)
-    sembrando(2,'izquierda',contador_sembrado) 
-
+        moverse(direcciones.get('derecha2'))
+        time.sleep(1)
+        sembrando(2,'derecha',contador_sembrado) 
   
 pyautogui.click(centro[0],centro[1],button='right')

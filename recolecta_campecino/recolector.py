@@ -10,12 +10,13 @@ def recolectar():
     time.sleep(0.4)
     if manita is None:
         CapitanMiau()
+        time.sleep(5)
     else:
 
         manita_pos=pyautogui.center(manita)
         pyautogui.moveTo(manita_pos)
         pyautogui.click(button='left')
-        time.sleep(2.9)
+        time.sleep(3)
         
 
 def talar():
@@ -24,12 +25,13 @@ def talar():
     time.sleep(0.4)
     if pinza is None:
         CapitanMiau()
+        time.sleep(5)
     else:
 
         pinza_pos=pyautogui.center(pinza)
         pyautogui.moveTo(pinza_pos)
         pyautogui.click(button='left')
-        time.sleep(2.9)
+        time.sleep(3)
         
         
         
@@ -42,7 +44,7 @@ def CapitanMiau():
     else:
         pywhatkit.sendwhatmsg_instantly("+34611131367", "hello", 15, True, 4)
         paso=input("presione 1 si ya paso:")   
-        time.sleep(5)
+        
     
                
     
@@ -53,10 +55,10 @@ def Derecha():
     recolectar()
     pyautogui.click(360,330,button='right')
     talar()
-def     Izquierda(): 
-    pyautogui.click(445,290,button='right')
+def Izquierda(): 
+    pyautogui.click(440,280,button='right')
     recolectar()
-    pyautogui.click(445,290,button='right')
+    pyautogui.click(440,280,button='right')
     talar()
 def Adelante(): 
     pyautogui.click(445,330,button='right')
@@ -85,14 +87,17 @@ def ejecutar_accion(x,y,direccion):
     
 ejecutar_accion(-50,30,"ida")
 Izquierda()
-for i in range(2):#5,5
+
+    
+for i in range(1):#5,5
 #ida    
     for j in range(3):
         ejecutar_accion(-50,30,"ida")
+        
     ejecutar_accion(50,30,"ida")
     ejecutar_accion(50,30,"ida")
     Derecha()
-    
+ 
     for j in range(3):
         ejecutar_accion(50,-30,"vuelta")
     ejecutar_accion(50,30,"vuelta")
