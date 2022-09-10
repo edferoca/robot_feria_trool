@@ -1,11 +1,14 @@
 import pyautogui, sys, time
 import pywhatkit
+import telebot 
+TOKEN = "5793926590:AAFpP0gB_pEekRuw4Qk9jVX3jwKcILyHrYA"
 
+bot=telebot.TeleBot(TOKEN)
 centro=[400,300]
 
 direcciones ={
     "adelante":[445,330],
-    "adelante2" : [495,360],
+    "adelante2" : [495,352], #para no tener obstaculos
     "atras":[360,290],
     "derecha":[360,330],
     "derecha2" : [310,360],
@@ -13,7 +16,8 @@ direcciones ={
     "izquierda2":[495,260]
 }
 
-semilla='amanita.png'
+semilla='eter.png'
+#semilla='amanita.png'
 contador_sembrado=0
 limite_siembra_por_sembrado=1
 
@@ -50,9 +54,9 @@ def sembrando(limite_siembra,poscicion,contador_sembrado):
         contador_sembrado += sembrado(direcciones.get('adelante'))
         contador_sembrado += sembrado(direcciones.get(poscicion))
         
-        print(contador_sembrado)
+        #print(contador_sembrado)
     
-
+bot.send_message(906440079,"tarea iniciada")
 pyautogui.click(centro[0],centro[1],button='right')
 pyautogui.press('6')
 
@@ -61,7 +65,9 @@ moverse(direcciones.get('derecha2'))
 time.sleep(1)
 sembrando(3,'derecha',contador_sembrado)
 print("pase por aqui")
-for i in range(2): #4
+
+
+for i in range(4): #4
     for j in range(3):
         moverse(direcciones.get('derecha2'))
         time.sleep(1)
@@ -84,3 +90,4 @@ for j in range(3):
         sembrando(2,'derecha',contador_sembrado) 
   
 pyautogui.click(centro[0],centro[1],button='right')
+bot.send_message(906440079,"tarea terminada")

@@ -1,5 +1,9 @@
 import pyautogui, sys, time
 import pywhatkit
+import telebot
+TOKEN = "5793926590:AAFpP0gB_pEekRuw4Qk9jVX3jwKcILyHrYA"
+
+bot=telebot.TeleBot(TOKEN)
 
 centroX=400
 centroY=300
@@ -42,13 +46,12 @@ def CapitanMiau():
     if CapitanMiau is None:
         pass
     else:
-        pywhatkit.sendwhatmsg_instantly("+34611131367", "hello", 15, True, 4)
+        bot.send_message(906440079,"<b>!capitanmiau</b>",parse_mode="html")
         paso=input("presione 1 si ya paso:")   
         
     
                
     
-
 #movimientos
 def Derecha():
     pyautogui.click(360,330,button='right')
@@ -84,12 +87,13 @@ def ejecutar_accion(x,y,direccion):
         pyautogui.click(centroX+x,centroY+y,button='left')
         time.sleep(0.6)
 
+bot.send_message(906440079,"recolecta iniciada")
     
 ejecutar_accion(-50,30,"ida")
 Izquierda()
 
     
-for i in range(1):#5,5
+for i in range(4):#5,5
 #ida    
     for j in range(3):
         ejecutar_accion(-50,30,"ida")
@@ -97,7 +101,7 @@ for i in range(1):#5,5
     ejecutar_accion(50,30,"ida")
     ejecutar_accion(50,30,"ida")
     Derecha()
- 
+    
     for j in range(3):
         ejecutar_accion(50,-30,"vuelta")
     ejecutar_accion(50,30,"vuelta")
@@ -105,4 +109,7 @@ for i in range(1):#5,5
     Izquierda()
 
     print(f"vualta: {i+1}")
+for j in range(4):
+        ejecutar_accion(-50,30,"ida")
 print("tarea termianda")
+bot.send_message(906440079,"recolecta Terminada")
