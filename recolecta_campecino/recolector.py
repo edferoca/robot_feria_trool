@@ -79,6 +79,7 @@ def ejecutar_accion(x,y,direccion):
     if direccion == "ida":
         Derecha()
         Adelante()
+        time.sleep(3)
         pyautogui.click(centroX+x,centroY+y,button='left')
         time.sleep(0.6)
     elif direccion == "vuelta":

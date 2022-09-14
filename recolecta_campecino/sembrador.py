@@ -56,7 +56,7 @@ def sembrando(limite_siembra,poscicion,contador_sembrado):
         
         #print(contador_sembrado)
     
-bot.send_message(906440079,"tarea iniciada")
+bot.send_message(906440079,"siembra iniciada")
 pyautogui.click(centro[0],centro[1],button='right')
 pyautogui.press('6')
 
@@ -90,4 +90,4 @@ for j in range(3):
         sembrando(2,'derecha',contador_sembrado) 
   
 pyautogui.click(centro[0],centro[1],button='right')
-bot.send_message(906440079,"tarea terminada")
+bot.send_message(906440079,"siembra terminada")
