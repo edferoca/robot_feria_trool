@@ -16,7 +16,8 @@ direcciones ={
     "izquierda2":[495,260]
 }
 
-semilla='eter.png'
+semilla='tahitarina.png'
+#semilla='eter.png'
 #semilla='amanita.png'
 contador_sembrado=0
 limite_siembra_por_sembrado=1

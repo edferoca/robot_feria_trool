@@ -17,15 +17,26 @@ direcciones ={
     "izquierda2":[495,260]
 }
 
-semilla='eter.png'
+semilla='tahitarina.png'
 
 def moverse(direccion,boton):
     pyautogui.click(direccion[0],direccion[1],button=boton)
     time.sleep(3)
 
 def recolectar(direccion):
+   # print(f'esta sembrada la parcela: { verificador_recolecta(direccion)}')  
+    verificador= verificador_recolecta(direccion)
     while verificador_recolecta(direccion) == True:
+        #print ("adios")
         ejecuta_recolecta(direccion)
+    if verificador_recolecta(direccion) == False:
+        CapitanMiau(direccion)
+    """
+    while verificador_recolecta(direccion) == True:
+        print ("adios")
+        ejecuta_recolecta(direccion)
+        """
+        
 
 ######################
 #funciones secundarias
@@ -41,14 +52,17 @@ def ejecuta_recolecta(direccion):
         pinzaRecolecta=pyautogui.locateOnScreen('talar.png',confidence=0.9,region=(0,0,800,600))
         time.sleep(0.4)
         if pinzaRecolecta is None:
-            CapitanMiau()
+            time.sleep(5)
+            CapitanMiau(direccion)
             time.sleep(5)
         else:
+            #print("corte")
             pinzaRecolecta_pos=pyautogui.center(pinzaRecolecta)
             pyautogui.moveTo(pinzaRecolecta_pos)
             pyautogui.click(button='left')
             time.sleep(3)          
     else:
+        #print("manita")
         ManitaRecolecta_pos=pyautogui.center(ManitaRecolecta)
         pyautogui.moveTo(ManitaRecolecta_pos)
         pyautogui.click(button='left')
@@ -63,7 +77,7 @@ def verificador_recolecta(direccion):
             sembrado=False
     else:
             sembrado=True
-    #print(f'esta sembrada la parcela: {sembrado}')
+   
     return sembrado
 
 ######################
@@ -71,12 +85,15 @@ def verificador_recolecta(direccion):
 ######################
 
     
-def CapitanMiau():
-    time.sleep(5)
+def CapitanMiau(direccion):
+    
     CapitanMiau=pyautogui.locateOnScreen('capitan_miau_2.png',confidence=0.6,region=(400,400,800,600))
-    print("capitan Miau?")
+    #print("capitan Miau?")
     if CapitanMiau is None:
+        print("no era el capitan")
         pass
     else:
         bot.send_message(906440079,"<b>!capitanmiau</b>",parse_mode="html")
         paso=input("presione 1 si ya paso:")  
+        while verificador_recolecta(direccion) == True:
+            ejecuta_recolecta(direccion)
