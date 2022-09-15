@@ -90,7 +90,7 @@ def CapitanMiau(direccion):
     CapitanMiau=pyautogui.locateOnScreen('capitan_miau_2.png',confidence=0.6,region=(400,400,800,600))
     #print("capitan Miau?")
     if CapitanMiau is None:
-        print("no era el capitan")
+        #print("no era el capitan")
         pass
     else:
         bot.send_message(906440079,"<b>!capitanmiau</b>",parse_mode="html")

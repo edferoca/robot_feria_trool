@@ -27,7 +27,7 @@ def recolectar_y_desplazarse(tipo,IdaVuelta):
 v.bot.send_message(906440079,"recolecta iniciada")
 recolectar_y_desplazarse(1,'ida')
 
-for i in range(3):
+for i in range(4):
     recolectar_y_desplazarse(2,'ida')
     for i in range(2):
         recolectar_y_desplazarse(1,'ida')
@@ -38,4 +38,9 @@ for i in range(3):
         recolectar_y_desplazarse(1,'vuelta')
     recolectar_y_desplazarse(3,'vuelta')
     recolectar_y_desplazarse(3,'vuelta')
-    v.moverse(v.direcciones.get('adelante'),'left')
+    #v.moverse(v.direcciones.get('adelante'),'left')
+recolectar_y_desplazarse(2,'ida')   
+for i in range(3):
+        recolectar_y_desplazarse(1,'ida') 
+v.moverse(v.centro,'right')
+v.bot.send_message(906440079,"siembra terminada")
