@@ -1,0 +1,12 @@
+from tkinter import *
+ventana = Tk()
+ventana.geometry("400x300")
+#etiqueta
+textoIntro = Label(ventana, text= "recolector herbolario mega pro")
+textoIntro.place(x=125,y=10)
+
+boton1 = Button(ventana,text="Aceptar")
+boton1.place(x=10,y=40)
+boton2 = Button(ventana,text="Aceptar")
+boton2.place(x=80,y=40)
+ventana.mainloop()
