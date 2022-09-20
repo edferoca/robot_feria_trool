@@ -16,7 +16,8 @@ direcciones ={
     "izquierda2":[495,260]
 }
 
-semilla='tahitarina.png'
+semilla='gracia.png'
+#semilla='tahitarina.png'
 #semilla='eter.png'
 #semilla='amanita.png'
 contador_sembrado=0
