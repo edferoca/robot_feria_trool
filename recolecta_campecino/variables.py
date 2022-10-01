@@ -111,7 +111,13 @@ class Cosntructor_Principal:
             "derecha2" : [310,360],
             "izquierda":[445,290],
             "izquierda2":[495,260]
-        }   
+        }  
+        self.semillas ={ 
+                        "gracia" : 'gracia.png',
+                        "tahitarina" : 'tahitarina.png',
+                        "eter" : 'eter.png',
+                        "amanita" : 'amanita.png'                       
+                        } 
         TOKEN = "5793926590:AAFpP0gB_pEekRuw4Qk9jVX3jwKcILyHrYA"
         bot=telebot.TeleBot(TOKEN)
     def moverse(self,direccion,boton):

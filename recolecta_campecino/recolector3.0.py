@@ -56,13 +56,13 @@ def ejecuta_recolecta(direccion):
             #print(2)
             time.sleep(5)
         else:
-            print("corte")
+            #print("corte")
             pinzaRecolecta_pos=pyautogui.center(pinzaRecolecta)
             pyautogui.moveTo(pinzaRecolecta_pos)
             pyautogui.click(button='left')
             time.sleep(3)          
     else:
-        print("manita")
+        #print("manita")
         ManitaRecolecta_pos=pyautogui.center(ManitaRecolecta)
         pyautogui.moveTo(ManitaRecolecta_pos)
         pyautogui.click(button='left')
@@ -75,10 +75,10 @@ def verificador_recolecta(direccion):
     time.sleep(0.4)
     if confirmacion is None:
             sembrado=False
-            print("no")
+            #print("no")
     else:
             sembrado=True
-            print("si")
+            #print("si")
    
     return sembrado
 
@@ -90,7 +90,7 @@ def verificador_recolecta(direccion):
 def CapitanMiau(direccion):
     
     CapitanMiau=pyautogui.locateOnScreen('capitan_miau_2.png',confidence=0.6,region=(400,400,800,600))
-    print("capitan Miau?")
+    #print("capitan Miau?")
     if CapitanMiau is None:
         #print("no era el capitan")
         pass
@@ -112,7 +112,7 @@ def recolectar_y_desplazarse(tipo,IdaVuelta):
         setnidoContrario='derecha'
     if tipo == 1:
         recolectar(direcciones.get('adelante'))
-        print('paso a siguietne parcela')
+        #print('paso a siguietne parcela')
         recolectar(direcciones.get(sentido))
         moverse(direcciones.get(sentido),'left')
     if tipo == 2:
@@ -127,27 +127,22 @@ def recolectar_y_desplazarse(tipo,IdaVuelta):
 
 
 bot.send_message(906440079,"recolecta iniciada")
-"""
+
 recolectar_y_desplazarse(1,'ida')
-"""
 for i in range(4):
-    """
     recolectar_y_desplazarse(2,'ida')
     for i in range(2):
         recolectar_y_desplazarse(1,'ida')
     recolectar_y_desplazarse(3,'ida')
     recolectar_y_desplazarse(3,'ida')
     recolectar_y_desplazarse(2,'vuelta')
-    """
     for i in range(2):
         recolectar_y_desplazarse(1,'vuelta')
     recolectar_y_desplazarse(3,'vuelta')
     recolectar_y_desplazarse(3,'vuelta')
     #v.moverse(v.direcciones.get('adelante'),'left')
-    """
 recolectar_y_desplazarse(2,'ida')   
 for i in range(3):
         recolectar_y_desplazarse(1,'ida') 
 moverse(centro,'right')
 bot.send_message(906440079,"siembra terminada")
-"""

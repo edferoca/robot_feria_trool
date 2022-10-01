@@ -16,7 +16,8 @@ direcciones ={
     "izquierda2":[495,260]
 }
 
-semilla='gracia.png'
+semilla='ortiga.png'
+#semilla='gracia.png'
 #semilla='tahitarina.png'
 #semilla='eter.png'
 #semilla='amanita.png'
@@ -34,8 +35,9 @@ def sembrado(direccion):
     time.sleep(0.4)
     if confirmacion is None:
             sembrado=0
+            #print("no")
     else:
-
+           # print("si")
             sembrado=1
     return sembrado
 
