@@ -8,72 +8,67 @@ centro=[400,300]
 
 direcciones ={
     "centro":[400,307],
-    "adelante":[442,307],
-    "adelante2" : [484,307], #para no tener obstaculos
-    "atras":[358,307],
-    "atras2":[316,307],
-    "derecha":[400,329],
-    "derecha2" : [400,351],
-    "izquierda":[400,285],
-    "izquierda2":[400,263]
+    "adelante":[442,329],
+    "adelante2" : [484,351], #para no tener obstaculos
+    "atras":[358,285],
+    "atras2":[316,263],
+    "derecha":[358,329],
+    "derecha2" : [316,351],
+    "izquierda":[442,285],
+    "izquierda2":[484,263]
 }
 
 siembraSegura = "img\siembra_segura.png"
 contador_sembrado=0
 limite_siembra_por_sembrado=1
 
-def moverse(direccion,boton='left'):
-    pyautogui.click(direccion[0],direccion[1],button=boton)
-    time.sleep(3)
 
-def sembrado_seguro():
-    #me ubico en  pos central (segura)
-    pyautogui.click(direcciones.get('centro'),button='left')
-    # escojo la semilla a cultivar (esta en  los atajos rapidos de wakfu)
-    pyautogui.press('6')
-    #siembra
-    pyautogui.click(direcciones.get('derecha'),button='left')
-    time.sleep(3)
-    pyautogui.click(direcciones.get('derecha'),button='right')
-    time.sleep(1)
-    pyautogui.click(direcciones.get('derecha'),button='right')
-    time.sleep(2)
-    confirmacion=pyautogui.locateOnScreen(siembraSegura,confidence=0.5,region=(0,0,800,600))
-    time.sleep(0.4)
-    if confirmacion is None:
-            sembrado=0
-            print("no sembro")
-    else:
-            print("si sembpro")
-            sembrado=1
-    return sembrado
 
-def sembrando(limite_siembra,poscicion,contador_sembrado):
-    
-    while contador_sembrado < limite_siembra:
-        #caso para  la segunda casilla
-        if limite_siembra == 3 :
-            moverse(direcciones.get('izquierda'))
-        moverse(direcciones.get('adelante'))
-        moverse(direcciones.get(poscicion))
-        time.sleep(0.7)
-        contador_sembrado=0
-        pyautogui.moveTo(centro[0],centro[1])
-        #caso para  la segunda casilla
-        if limite_siembra == 3 :
-            contador_sembrado += sembrado(direcciones.get('izquierda'))
-        contador_sembrado += sembrado(direcciones.get('adelante'))
-        contador_sembrado += sembrado(direcciones.get(poscicion))
+def sembrado_seguro(direccion):
+    sembrado = False
+    while sembrado == False:
+        #revisa si se ha sembrado algo en el lugar
+        #acciones del raton para revisar
+        pyautogui.click(direcciones.get(direccion),button='right')
+        time.sleep(0.5)
+        pyautogui.click(direcciones.get(direccion),button='right')
+        time.sleep(1)
+        #revisa que la imagen que confirma sea correcta
+        confirmacion=pyautogui.locateOnScreen(siembraSegura,confidence=0.8,region=(0,0,800,600))
+        time.sleep(0.4)
+        #si es correcta o no cambia el estado del indicador "sembrado" para salir del bucle
+        if confirmacion is None:
+            # escojo la semilla a cultivar (esta en  los atajos rapidos de wakfu)
+            pyautogui.press('6')
+            #siembra
+            pyautogui.click(direcciones.get(direccion),button='left')
+            time.sleep(3) 
+        else:
+                sembrado = True
         
-        #print(contador_sembrado)
+
+def recorrido_de_siembra(direccion_recorrido):
+    
+    sembrado_seguro("derecha")
+    sembrado_seguro("adelante")
+    sembrado_seguro("izquierda")
+    time.sleep(2) 
+    pyautogui.click(direcciones.get(direccion_recorrido),button='left')
+
+ 
     
 bot.send_message(906440079,"siembra iniciada")
 pyautogui.click(centro[0],centro[1],button='right')
+for i in range(4):
+    for i in range(3):
+        recorrido_de_siembra('derecha')
+    for i in range(2):
+        recorrido_de_siembra('adelante')
+    for i in range(3):
+        recorrido_de_siembra('izquierda')
+    for i in range(2):
+        recorrido_de_siembra('adelante')
 
 
-sembrado_seguro()
 
-
-  
-pyautogui.click(centro[0],centro[1],button='right')
 bot.send_message(906440079,"siembra terminada")
