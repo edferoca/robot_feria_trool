@@ -150,7 +150,7 @@ def ruta(acciones):
 # ejecucion programa
 ######################
 
-bot.send_message(906440079,"recolecta iniciada")
+bot.send_message(906440079,"siembra iniciada")
 siembre = [recojida_semilla]
 reco_y_tala=[recojida_semilla,tala_recurso]
 
@@ -161,7 +161,9 @@ for i in range(8):
     pyautogui.click(direcciones.get('atras2'),button='left')
     time.sleep(1) 
 print('esperar a que cresca algo')
+bot.send_message(906440079,"siembra iniciada")
 time.sleep(150)  
+bot.send_message(906440079,"recolecta iniciada")
 print('inicia la recolecta')
 ruta(reco_y_tala)
 
@@ -170,4 +172,4 @@ for i in range(8):
     time.sleep(1) 
     
 
-bot.send_message(906440079,"siembra terminada")
+bot.send_message(906440079,"recolecta terminada")
