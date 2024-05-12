@@ -13,13 +13,13 @@ centro=[400,300]
 
 direcciones ={
     "centro":[400,307],
-    "adelante":[442,329],
+    "adelante":[442,329],#"adelante":[442,329],
     "adelante2" : [484,351], #para no tener obstaculos
     "atras":[358,285],
     "atras2":[316,263],
     "derecha":[358,329],
     "derecha2" : [316,351],
-    "izquierda":[442,285],
+    "izquierda":[442,285], #"izquierda":[442,285],
     "izquierda2":[484,263]
 }
 
@@ -61,6 +61,41 @@ def CapitanMiau(imagen):
         abrir_ventana()
         pyautogui.moveTo(direcciones.get('centro'))
 
+def ejecutar_accion(direccion, accion):
+    # esta funcion recoje o tala un recurso segun se especifique en la pos determinada
+    pyautogui.click(direcciones.get(direccion), button='right')
+    time.sleep(1)
+    
+    # Realizar clicks en los pixeles circundantes para activar la acción
+    for offset_x in range(-3, 4):
+        for offset_y in range(-3, 4):
+            
+            pyautogui.click(direcciones.get(direccion)[0] + offset_x, 
+                            direcciones.get(direccion)[1] + offset_y, 
+                            button='right')
+            print(f'hola{direcciones.get(direccion)[0] + offset_x},{direcciones.get(direccion)[1] + offset_y}')
+            time.sleep(0.5)
+            # buscar la accion a realizar
+            confirmacion = pyautogui.locateOnScreen(accion, confidence=0.8, region=(0, 0, 800, 600))
+            time.sleep(0.4)
+            # si la accion esta disponible la ejecutara, si no, pues pasa
+            if confirmacion is None:
+                pass
+            else:
+                confirmacion_pos = pyautogui.center(confirmacion)
+                # mueve el mouse al lugar de la accion y le ejecuta
+                pyautogui.moveTo(confirmacion_pos)
+                pyautogui.click(button='left')
+                # tiempo de espera para recolectar
+                time.sleep(5)
+                # reviso si aparece el capitan miau
+                CapitanMiau(capitanMiau_img)
+                break
+        else:
+            continue
+        break
+
+"""
 def ejecutar_accion(direccion,accion):
     ## esta funcion recoje o tala un recurso segun se especifique en la  pos determinada
     pyautogui.click(direcciones.get(direccion),button='right')
@@ -82,7 +117,7 @@ def ejecutar_accion(direccion,accion):
         #reviso si aparece el capitan miau
         CapitanMiau(capitanMiau_img)   
         
-        
+     """   
     
 ######################
 # funciones sembrado
@@ -93,22 +128,35 @@ def sembrado_seguro(direccion):
     while sembrado == False:
         #revisa si se ha sembrado algo en el lugar
         #acciones del raton para revisar
-        pyautogui.click(direcciones.get(direccion),button='right')
-        time.sleep(0.5)
-        pyautogui.click(direcciones.get(direccion),button='right')
-        time.sleep(1)
-        #revisa que la imagen que confirma sea correcta
-        confirmacion=pyautogui.locateOnScreen(siembraSegura,confidence=0.8,region=(0,0,800,600))
-        time.sleep(0.4)
-        #si es correcta o no cambia el estado del indicador "sembrado" para salir del bucle
-        if confirmacion is None:
-            # escojo la semilla a cultivar (esta en  los atajos rapidos de wakfu)
-            pyautogui.press('3')
-            #siembra
-            pyautogui.click(direcciones.get(direccion),button='left')
-            time.sleep(3) 
-        else:
-                sembrado = True
+        for offset_x in range(-3, 4):
+            for offset_y in range(-3, 4):
+                
+                pyautogui.click(direcciones.get(direccion)[0] + offset_x, 
+                                direcciones.get(direccion)[1] + offset_y, 
+                                button='right')
+                time.sleep(0.5)
+                pyautogui.click(direcciones.get(direccion)[0] + offset_x, 
+                                direcciones.get(direccion)[1] + offset_y, 
+                                button='right')
+                time.sleep(1)
+                #revisa que la imagen que confirma sea correcta
+                # buscar la accion a realizar
+                confirmacion=pyautogui.locateOnScreen(siembraSegura,confidence=0.8,region=(0,0,800,600))
+                time.sleep(0.4)
+                #si es correcta o no cambia el estado del indicador "sembrado" para salir del bucle
+                if confirmacion is None:
+                    # escojo la semilla a cultivar (esta en  los atajos rapidos de wakfu)
+                    pyautogui.press('3')
+                    #siembra
+                    pyautogui.click(direcciones.get(direccion),button='left')
+                    time.sleep(3) 
+                else:
+                        sembrado = True
+                        print(f'hola{direcciones.get(direccion)[0] + offset_x},{direcciones.get(direccion)[1] + offset_y}')
+                        break
+            else:
+                continue
+            break
 
             
 
