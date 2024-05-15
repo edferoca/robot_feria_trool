@@ -24,7 +24,8 @@ direcciones ={
 }
 
 recojida_semilla = "img\seleccion.png"
-tala_recurso = "img/talar.png"
+tala_recurso = "img\calar.png"
+#tala_recurso = "img/segar.png"
 capitanMiau_img = "img\capitan_miau_3.png"
 siembraSegura = "img\siembra_segura.png"
 
@@ -62,24 +63,22 @@ def CapitanMiau(imagen):
         pyautogui.moveTo(direcciones.get('centro'))
 
 def ejecutar_accion(direccion, accion):
-    # esta funcion recoje o tala un recurso segun se especifique en la pos determinada
-    pyautogui.click(direcciones.get(direccion), button='right')
-    time.sleep(1)
-    
+        
     # Realizar clicks en los pixeles circundantes para activar la acción
-    for offset_x in range(-3, 4):
-        for offset_y in range(-3, 4):
+    for offset_x in range(-1, 1):
+        for offset_y in range(-1, 1):
             
             pyautogui.click(direcciones.get(direccion)[0] + offset_x, 
                             direcciones.get(direccion)[1] + offset_y, 
                             button='right')
-            print(f'hola{direcciones.get(direccion)[0] + offset_x},{direcciones.get(direccion)[1] + offset_y}')
-            time.sleep(0.5)
+           # print(f'hola{direcciones.get(direccion)[0] + offset_x},{direcciones.get(direccion)[1] + offset_y}')
+            time.sleep(1)
             # buscar la accion a realizar
-            confirmacion = pyautogui.locateOnScreen(accion, confidence=0.8, region=(0, 0, 800, 600))
+            confirmacion = pyautogui.locateOnScreen(accion, confidence=0.8, region=(0, 0, 800, 600)) 
             time.sleep(0.4)
             # si la accion esta disponible la ejecutara, si no, pues pasa
             if confirmacion is None:
+                
                 pass
             else:
                 confirmacion_pos = pyautogui.center(confirmacion)
@@ -95,29 +94,7 @@ def ejecutar_accion(direccion, accion):
             continue
         break
 
-"""
-def ejecutar_accion(direccion,accion):
-    ## esta funcion recoje o tala un recurso segun se especifique en la  pos determinada
-    pyautogui.click(direcciones.get(direccion),button='right')
-    time.sleep(2)
-    #buscara la accion a realizar
-    confirmacion=pyautogui.locateOnScreen(accion,confidence=0.8,region=(0,0,800,600))
-    
-    time.sleep(0.4)
-    #si la accion esta disponible la eejecutara, si no pues pasa
-    if confirmacion is None:
-        pass
-    else:
-        confirmacion_pos = pyautogui.center(confirmacion)
-        #mueve el mouse al lugar de la accion y le ejecuta
-        pyautogui.moveTo(confirmacion_pos)
-        pyautogui.click(button='left')
-        #tiempo de espera para recolectar
-        time.sleep(5)
-        #reviso si aparece el capitan miau
-        CapitanMiau(capitanMiau_img)   
-        
-     """   
+
     
 ######################
 # funciones sembrado
@@ -128,8 +105,8 @@ def sembrado_seguro(direccion):
     while sembrado == False:
         #revisa si se ha sembrado algo en el lugar
         #acciones del raton para revisar
-        for offset_x in range(-3, 4):
-            for offset_y in range(-3, 4):
+        for offset_x in range(-2, 2):
+            for offset_y in range(-2, 2):
                 
                 pyautogui.click(direcciones.get(direccion)[0] + offset_x, 
                                 direcciones.get(direccion)[1] + offset_y, 
@@ -201,15 +178,18 @@ def ruta(acciones):
 bot.send_message(906440079,"recolecta iniciada")
 siembre = [recojida_semilla]
 reco_y_tala=[recojida_semilla,tala_recurso]
-
+"""
+ """
 print('inicia la siembra')
 ruta(siembre)
 
 for i in range(8):
     pyautogui.click(direcciones.get('atras2'),button='left')
     time.sleep(1) 
+  
 print('esperar a que cresca algo')
 time.sleep(150)  
+ 
 print('inicia la recolecta')
 ruta(reco_y_tala)
 
