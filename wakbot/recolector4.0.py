@@ -52,7 +52,7 @@ def abrir_ventana():
 
 def CapitanMiau(imagen):
     
-    CapitanMiau=pyautogui.locateOnScreen(imagen,confidence=0.5,region=(0,500,800,600))
+    CapitanMiau=pyautogui.locateOnScreen(imagen,confidence=0.5,region=(0,400,800,600))
     #print("capitan Miau?")
     if CapitanMiau is None:
         #print("no era el capitan")
@@ -65,8 +65,8 @@ def CapitanMiau(imagen):
 def ejecutar_accion(direccion, accion):
         
     # Realizar clicks en los pixeles circundantes para activar la acción
-    for offset_x in range(-1, 1):
-        for offset_y in range(-1, 1):
+    for offset_y in range(-2, 0):
+        for offset_x in range(-2, 0):
             
             pyautogui.click(direcciones.get(direccion)[0] + offset_x, 
                             direcciones.get(direccion)[1] + offset_y, 
@@ -74,8 +74,8 @@ def ejecutar_accion(direccion, accion):
            # print(f'hola{direcciones.get(direccion)[0] + offset_x},{direcciones.get(direccion)[1] + offset_y}')
             time.sleep(1)
             # buscar la accion a realizar
-            confirmacion = pyautogui.locateOnScreen(accion, confidence=0.8, region=(0, 0, 800, 600)) 
-            time.sleep(0.4)
+            confirmacion = pyautogui.locateOnScreen(accion, confidence=0.8, region=(0, 0, 520, 370)) #800, 600 
+            time.sleep(0.8)
             # si la accion esta disponible la ejecutara, si no, pues pasa
             if confirmacion is None:
                 
@@ -86,7 +86,7 @@ def ejecutar_accion(direccion, accion):
                 pyautogui.moveTo(confirmacion_pos)
                 pyautogui.click(button='left')
                 # tiempo de espera para recolectar
-                time.sleep(5)
+                time.sleep(6)
                 # reviso si aparece el capitan miau
                 CapitanMiau(capitanMiau_img)
                 break
@@ -118,7 +118,7 @@ def sembrado_seguro(direccion):
                 time.sleep(1)
                 #revisa que la imagen que confirma sea correcta
                 # buscar la accion a realizar
-                confirmacion=pyautogui.locateOnScreen(siembraSegura,confidence=0.8,region=(0,0,800,600))
+                confirmacion=pyautogui.locateOnScreen(siembraSegura,confidence=0.6,region=(0,0,800,600))
                 time.sleep(0.4)
                 #si es correcta o no cambia el estado del indicador "sembrado" para salir del bucle
                 if confirmacion is None:
@@ -142,34 +142,63 @@ def sembrado_seguro(direccion):
 ######################
         
 
-def recorrido_de_accion(direccion_recorrido,accion):
-    if len(accion) == 1:
+
+    
+def ruta_siembra():
+    for i in range(16):
+        sembrado_seguro("derecha")
+        sembrado_seguro("atras")
+        sembrado_seguro("izquierda")
+        time.sleep(2) 
+        pyautogui.click(direcciones.get("atras"),button='left')
+        time.sleep(2) 
+    for i in range(3):
+        sembrado_seguro("derecha")
+        sembrado_seguro("atras")
+        sembrado_seguro("izquierda")
+        time.sleep(2) 
+        pyautogui.click(direcciones.get("izquierda"),button='left')
+        time.sleep(2) 
+    for i in range(16):
         sembrado_seguro("derecha")
         sembrado_seguro("adelante")
         sembrado_seguro("izquierda")
-    else:
+        time.sleep(2) 
+        pyautogui.click(direcciones.get("adelante"),button='left')
+        time.sleep(2)
+        
+def ruta_recolecta(accion):
+    for i in range(16):
+        ejecutar_accion("derecha",accion[0])
+        ejecutar_accion("derecha",accion[1])
+        ejecutar_accion("atras",accion[0])
+        ejecutar_accion("atras",accion[1])
+        ejecutar_accion("izquierda",accion[0])
+        ejecutar_accion("izquierda",accion[1])
+        time.sleep(2) 
+        pyautogui.click(direcciones.get("atras"),button='left')
+        time.sleep(2) 
+    for i in range(3):
+        ejecutar_accion("derecha",accion[0])
+        ejecutar_accion("derecha",accion[1])
+        ejecutar_accion("atras",accion[0])
+        ejecutar_accion("atras",accion[1])
+        ejecutar_accion("izquierda",accion[0])
+        ejecutar_accion("izquierda",accion[1])
+        time.sleep(2) 
+        pyautogui.click(direcciones.get("izquierda"),button='left')
+        time.sleep(2) 
+    for i in range(16):
         ejecutar_accion("derecha",accion[0])
         ejecutar_accion("derecha",accion[1])
         ejecutar_accion("adelante",accion[0])
         ejecutar_accion("adelante",accion[1])
         ejecutar_accion("izquierda",accion[0])
         ejecutar_accion("izquierda",accion[1])
-    
+        time.sleep(2) 
+        pyautogui.click(direcciones.get("adelante"),button='left')
+        time.sleep(2) 
         
-    time.sleep(2) 
-    pyautogui.click(direcciones.get(direccion_recorrido),button='left')
-    time.sleep(2) 
-    
-def ruta(acciones):
-    for i in range(4):
-        for i in range(3):
-            recorrido_de_accion('derecha',acciones)
-        for i in range(2):
-            recorrido_de_accion('adelante',acciones)
-        for i in range(3):
-            recorrido_de_accion('izquierda',acciones)
-        for i in range(2):
-            recorrido_de_accion('adelante',acciones)
 
 ######################
 # ejecucion programa
@@ -178,23 +207,26 @@ def ruta(acciones):
 bot.send_message(906440079,"siembra iniciada")
 siembre = [recojida_semilla]
 reco_y_tala=[recojida_semilla,tala_recurso]
-"""
- """
-print('inicia la siembra')
-ruta(siembre)
 
-for i in range(8):
-    pyautogui.click(direcciones.get('atras2'),button='left')
+
+"""
+"""
+print('inicia la siembra')
+ruta_siembra()
+
+for i in range(3):
+    pyautogui.click(direcciones.get('derecha'),button='left')
     time.sleep(1) 
   
 print('esperar a que cresca algo')
-bot.send_message(906440079,"siembra iniciada")
+bot.send_message(906440079,"siembra terminada")
 time.sleep(150)  
+
 
 bot.send_message(906440079,"recolecta iniciada")
 
 print('inicia la recolecta')
-ruta(reco_y_tala)
+ruta_recolecta(reco_y_tala)
 
 for i in range(8):
     pyautogui.click(direcciones.get('atras2'),button='left')
