@@ -86,7 +86,7 @@ def ejecutar_accion(direccion, accion):
                 pyautogui.moveTo(confirmacion_pos)
                 pyautogui.click(button='left')
                 # tiempo de espera para recolectar
-                time.sleep(6)
+                time.sleep(5)
                 # reviso si aparece el capitan miau
                 CapitanMiau(capitanMiau_img)
                 break
