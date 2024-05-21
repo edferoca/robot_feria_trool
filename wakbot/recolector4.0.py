@@ -65,8 +65,8 @@ def CapitanMiau(imagen):
 def ejecutar_accion(direccion, accion):
         
     # Realizar clicks en los pixeles circundantes para activar la acción
-    for offset_y in range(-2, 0):
-        for offset_x in range(-2, 0):
+    for offset_y in range(-3, 3):
+        for offset_x in range(-1, 1):
             
             pyautogui.click(direcciones.get(direccion)[0] + offset_x, 
                             direcciones.get(direccion)[1] + offset_y, 
@@ -105,7 +105,7 @@ def sembrado_seguro(direccion):
     while sembrado == False:
         #revisa si se ha sembrado algo en el lugar
         #acciones del raton para revisar
-        for offset_x in range(-2, 2):
+        for offset_x in range(-3, 3):
             for offset_y in range(-2, 2):
                 
                 pyautogui.click(direcciones.get(direccion)[0] + offset_x, 
@@ -129,7 +129,7 @@ def sembrado_seguro(direccion):
                     time.sleep(3) 
                 else:
                         sembrado = True
-                        print(f'hola{direcciones.get(direccion)[0] + offset_x},{direcciones.get(direccion)[1] + offset_y}')
+                        #print(f'hola{direcciones.get(direccion)[0] + offset_x},{direcciones.get(direccion)[1] + offset_y}')
                         break
             else:
                 continue
@@ -211,6 +211,7 @@ reco_y_tala=[recojida_semilla,tala_recurso]
 
 """
 """
+
 print('inicia la siembra')
 ruta_siembra()
 
@@ -228,9 +229,8 @@ bot.send_message(906440079,"recolecta iniciada")
 print('inicia la recolecta')
 ruta_recolecta(reco_y_tala)
 
-for i in range(8):
-    pyautogui.click(direcciones.get('atras2'),button='left')
+for i in range(3):
+    pyautogui.click(direcciones.get('derecha'),button='left')
     time.sleep(1) 
-    
 
 bot.send_message(906440079,"recolecta terminada")
