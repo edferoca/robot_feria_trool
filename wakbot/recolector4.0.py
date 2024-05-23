@@ -26,6 +26,7 @@ direcciones ={
 recojida_semilla = "img\seleccion.png"
 tala_recurso = "img\calar.png"
 #tala_recurso = "img/segar.png"
+corta_arbol_recurso = "img\calar2.png"
 capitanMiau_img = "img\capitan_miau_3.png"
 siembraSegura = "img\siembra_segura.png"
 
@@ -106,8 +107,8 @@ def sembrado_seguro(direccion):
         #revisa si se ha sembrado algo en el lugar
         #acciones del raton para revisar
         for offset_x in range(-3, 3):
-            for offset_y in range(-2, 2):
-                
+            for offset_y in range(-1, 1):
+                #este confirmo que no tenga nada en la mano con el fin de revisar la semilla
                 pyautogui.click(direcciones.get(direccion)[0] + offset_x, 
                                 direcciones.get(direccion)[1] + offset_y, 
                                 button='right')
@@ -115,7 +116,7 @@ def sembrado_seguro(direccion):
                 pyautogui.click(direcciones.get(direccion)[0] + offset_x, 
                                 direcciones.get(direccion)[1] + offset_y, 
                                 button='right')
-                time.sleep(1)
+                time.sleep(0.7)
                 #revisa que la imagen que confirma sea correcta
                 # buscar la accion a realizar
                 confirmacion=pyautogui.locateOnScreen(siembraSegura,confidence=0.6,region=(0,0,800,600))
@@ -124,6 +125,7 @@ def sembrado_seguro(direccion):
                 if confirmacion is None:
                     # escojo la semilla a cultivar (esta en  los atajos rapidos de wakfu)
                     pyautogui.press('3')
+                    time.sleep(0.5)
                     #siembra
                     pyautogui.click(direcciones.get(direccion),button='left')
                     time.sleep(3) 
@@ -145,13 +147,15 @@ def sembrado_seguro(direccion):
 
     
 def ruta_siembra():
+    #siembra recorriendo de derecha a izquierda 
     for i in range(16):
         sembrado_seguro("derecha")
         sembrado_seguro("atras")
         sembrado_seguro("izquierda")
         time.sleep(2) 
         pyautogui.click(direcciones.get("atras"),button='left')
-        time.sleep(2) 
+        time.sleep(2)
+    #sube tres casillas para empesar una nueva hilera 
     for i in range(3):
         sembrado_seguro("derecha")
         sembrado_seguro("atras")
@@ -166,6 +170,44 @@ def ruta_siembra():
         time.sleep(2) 
         pyautogui.click(direcciones.get("adelante"),button='left')
         time.sleep(2)
+    for i in range(3):
+        pyautogui.click(direcciones.get('derecha'),button='left')
+        time.sleep(1) 
+
+def ruta_simebra_arboles():
+    sembrado_seguro("izquierda")
+    time.sleep(1) 
+    pyautogui.click(direcciones.get("atras"),button='left')
+    time.sleep(2)
+    for i in range(16):
+        sembrado_seguro("derecha")
+        sembrado_seguro("izquierda")
+        time.sleep(1) 
+        pyautogui.click(direcciones.get("atras"),button='left')
+        time.sleep(2) 
+        print(f'vualta{i} de ida')
+    sembrado_seguro("izquierda")
+    time.sleep(1) 
+    pyautogui.click(direcciones.get("derecha"),button='left')
+    time.sleep(2) 
+    pyautogui.click(direcciones.get("derecha"),button='left')
+    time.sleep(2) 
+    pyautogui.click(direcciones.get("derecha"),button='left')
+    time.sleep(2) 
+    print('siembra1')
+    sembrado_seguro("derecha")
+    print('siembra2')
+    pyautogui.click(direcciones.get("adelante"),button='left')
+    time.sleep(2) 
+    for j in range(16):
+        sembrado_seguro("derecha")
+        sembrado_seguro("izquierda")
+        time.sleep(1) 
+        pyautogui.click(direcciones.get("adelante"),button='left')
+        time.sleep(2) 
+    sembrado_seguro("izquierda")
+    sembrado_seguro("derecha")
+    
         
 def ruta_recolecta(accion):
     for i in range(16):
@@ -198,7 +240,39 @@ def ruta_recolecta(accion):
         time.sleep(2) 
         pyautogui.click(direcciones.get("adelante"),button='left')
         time.sleep(2) 
-        
+
+def ruta_recolecta_arboles(accion):
+    for i in range(17):
+        ejecutar_accion("derecha",accion[0])
+        ejecutar_accion("izquierda",accion[0])
+        time.sleep(1) 
+        pyautogui.click(direcciones.get("atras"),button='left')
+        time.sleep(2) 
+    print("1")
+    ejecutar_accion("derecha",accion[0])   
+    #sube 2 casillas
+    pyautogui.click(direcciones.get('izquierda'),button='left')
+    time.sleep(1) 
+    pyautogui.click(direcciones.get("adelante"),button='left')
+    time.sleep(1) 
+    for i in range(17):
+        ejecutar_accion("izquierda",accion[0])
+        time.sleep(1) 
+        pyautogui.click(direcciones.get("adelante"),button='left')
+        time.sleep(2) 
+        print(f'vualta{i} de vuelta')
+    pyautogui.click(direcciones.get('izquierda'),button='left')
+    time.sleep(1) 
+    pyautogui.click(direcciones.get('izquierda'),button='left')
+    time.sleep(1) 
+    for i in range(17):
+        ejecutar_accion("izquierda",accion[1])
+        ejecutar_accion("izquierda",accion[1])
+        time.sleep(1) 
+        pyautogui.click(direcciones.get("atras"),button='left')
+        time.sleep(2) 
+        print(f'vualta{i} de ida')
+    
 
 ######################
 # ejecucion programa
@@ -207,27 +281,30 @@ def ruta_recolecta(accion):
 bot.send_message(906440079,"siembra iniciada")
 siembre = [recojida_semilla]
 reco_y_tala=[recojida_semilla,tala_recurso]
+corta_o_tala=[corta_arbol_recurso,tala_recurso]
 
 
 """
 """
 
 print('inicia la siembra')
-ruta_siembra()
+#ruta_siembra()
+ruta_simebra_arboles()
 
-for i in range(3):
-    pyautogui.click(direcciones.get('derecha'),button='left')
-    time.sleep(1) 
+
   
 print('esperar a que cresca algo')
 bot.send_message(906440079,"siembra terminada")
-time.sleep(150)  
+#time.sleep(150)  
+time.sleep(600)  
 
 
 bot.send_message(906440079,"recolecta iniciada")
 
 print('inicia la recolecta')
-ruta_recolecta(reco_y_tala)
+#ruta_recolecta(reco_y_tala)
+
+ruta_recolecta_arboles(corta_o_tala)
 
 for i in range(3):
     pyautogui.click(direcciones.get('derecha'),button='left')
