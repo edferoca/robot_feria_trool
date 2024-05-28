@@ -80,7 +80,7 @@ recurso crecio
 depende de la imagen (accion)
 y de la celda requerida (direccion)
 """
-def ejecutar_accion(direccion, accion):
+def ejecutar_accion(direccion, accion,root):
         
     # Realizar clicks en los pixeles circundantes para activar la acción
     for offset_y in range(-3, 3):
@@ -106,7 +106,7 @@ def ejecutar_accion(direccion, accion):
                 # tiempo de espera para recolectar
                 time.sleep(5)
                 # reviso si aparece el capitan miau
-                CapitanMiau(imagenes.get("capitanMiau_img"),direcciones.get('centro'))
+                CapitanMiau(imagenes.get("capitanMiau_img"),direcciones.get('centro'),root)
                 break
         else:
             continue

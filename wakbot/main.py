@@ -14,75 +14,90 @@ class App:
     def __init__(self, root):
         self.root = root
         self.root.title("Aplicación de Ejemplo")
+        self.funcion_seleccionada = tk.StringVar()
 
-        self.funcion_seleccionada = tk.StringVar(value="recorrido_herb_camp")
+        self.crear_interfaz()
 
-        # Crear los botones de selección de función
-        self.crear_seleccion_funcion()
+    def crear_interfaz(self):
+        self.seleccion_funcion_frame = tk.Frame(self.root)
+        self.seleccion_funcion_frame.pack(pady=15)
 
-        # Crear el marco para los parámetros de entrada
-        self.parametros_frame = tk.Frame(root)
-        self.parametros_frame.pack(pady=10)
+        label = tk.Label(self.seleccion_funcion_frame, text="Seleccione una función:")
+        label.pack(anchor=tk.W)
 
-        # Crear el botón de ejecutar
-        self.ejecutar_btn = tk.Button(root, text="Ejecutar", command=self.ejecutar_funcion)
-        self.ejecutar_btn.pack(pady=10)
+        opciones = ["recorrido_herb_camp", "ruta_siembra", "ruta_recolecta"]
+        self.funcion_combobox = ttk.Combobox(self.seleccion_funcion_frame, textvariable=self.funcion_seleccionada)
+        self.funcion_combobox['values'] = opciones
+        self.funcion_combobox.pack()
 
-        # Crear la barra de progreso
-        self.progress_var = tk.IntVar()
-        self.progress_bar = ttk.Progressbar(root, maximum=100, variable=self.progress_var)
-        self.progress_bar.pack(pady=10)
+        self.confirmar_btn = tk.Button(self.root, text="Aceptar", command=self.confirmar_seleccion)
+        self.confirmar_btn.pack(pady=10)
 
-        # Crear los campos de entrada de parámetros para la función seleccionada
-        self.actualizar_parametros()
-
-    def crear_seleccion_funcion(self):
-        opciones = [("Recorrido Herb Camp", "recorrido_herb_camp"),
-                    ("Recorrido Leñador", "recorrido_leñador"),
-                    ("Recorrido Espanto", "recorrido_espanto")]
-        for (texto, valor) in opciones:
-            radio_btn = tk.Radiobutton(self.root, text=texto, variable=self.funcion_seleccionada, value=valor, command=self.actualizar_parametros)
-            radio_btn.pack(anchor=tk.W)
-
-    def actualizar_parametros(self):
-        for widget in self.parametros_frame.winfo_children():
-            widget.destroy()
-
+    def confirmar_seleccion(self):
         funcion = self.funcion_seleccionada.get()
-        if funcion == "recorrido_herb_camp":
-            self.param1_entry = self.crear_entrada_parametro("Param 1")
-            self.param2_entry = self.crear_entrada_parametro("Param 2")
-        elif funcion == "recorrido_leñador":
-            self.param1_entry = self.crear_entrada_parametro("Param 1")
-            self.param2_entry = self.crear_entrada_parametro("Param 2")
-            self.param3_entry = self.crear_entrada_parametro("Param 3")
-        elif funcion == "recorrido_espanto":
-            self.param1_entry = self.crear_entrada_parametro("Param 1")
+        if funcion:
+            self.seleccion_funcion_frame.pack_forget()
+            self.confirmar_btn.pack_forget()
 
-    def crear_entrada_parametro(self, label_text):
+            confirmacion_label = tk.Label(self.root, text=f"Función seleccionada: {funcion}")
+            confirmacion_label.pack()
+
+            self.parametros_frame = tk.Frame(self.root)
+            self.parametros_frame.pack(pady=15)
+
+            if funcion == "recorrido_herb_camp":
+                self.param1_var = tk.BooleanVar()
+                self.param2_var = tk.BooleanVar()
+                self.param3_var = tk.BooleanVar()
+
+                self.crear_checkbox_parametro("Tijera o Segar", self.param1_var)
+                self.crear_checkbox_parametro("Siembra", self.param2_var)
+                self.crear_checkbox_parametro("Recolecta", self.param3_var)
+
+            self.ejecutar_btn = tk.Button(self.root, text="Ejecutar", command=self.iniciar_ejecucion)
+            self.ejecutar_btn.pack(pady=15)
+
+    def crear_checkbox_parametro(self, label_text, variable):
         frame = tk.Frame(self.parametros_frame)
         frame.pack(pady=2)
         label = tk.Label(frame, text=label_text)
         label.pack(side=tk.LEFT)
-        entry = tk.Entry(frame)
-        entry.pack(side=tk.LEFT)
-        return entry
+        checkbox = tk.Checkbutton(frame, variable=variable)
+        checkbox.pack(side=tk.LEFT)
 
-    def ejecutar_funcion(self):
-        funcion = self.funcion_seleccionada.get()
-        if funcion == "recorrido_herb_camp":
-            param1 = self.param1_entry.get()
-            param2 = self.param2_entry.get()
-            thread = threading.Thread(target=lib.recorrido_herb_camp, args=(param1, param2, self.progress_var))
-        elif funcion == "recorrido_leñador":
-            param1 = self.param1_entry.get()
-            param2 = self.param2_entry.get()
-            param3 = self.param3_entry.get()
-            thread = threading.Thread(target=lib.recorrido_leñador, args=(param1, param2, param3, self.progress_var))
-        elif funcion == "recorrido_espanto":
-            param1 = self.param1_entry.get()
-            thread = threading.Thread(target=lib.recorrido_espanto, args=(param1, self.progress_var))
-        thread.start()
+    def iniciar_ejecucion(self):
+        self.parametros_frame.pack_forget()
+        self.ejecutar_btn.pack_forget()
+
+        contador_label = tk.Label(self.root, text="", font=("Helvetica", 32))
+        contador_label.pack(pady=20)
+
+        def cuenta_regresiva():
+            for i in range(3, 0, -1):
+                contador_label.config(text=str(i))
+                self.root.update()
+                time.sleep(1)
+
+            contador_label.config(text="Ejecutando función...")
+            self.root.update()
+            time.sleep(1)
+            contador_label.pack_forget()
+
+            # Obtener los parámetros y ejecutar la función en un hilo separado
+            funcion = self.funcion_seleccionada.get()
+            if funcion == "recorrido_herb_camp":
+                param1 = self.param1_var.get()
+                param2 = self.param2_var.get()
+                param3 = self.param3_var.get()
+                thread = threading.Thread(target=lib.recorrido_herb_camp, args=(root,param1, param2, param3))
+        
+            elif funcion == "ruta_siembra":
+                thread = threading.Thread(target=lib.ruta_siembra)
+            elif funcion == "ruta_recolecta":
+                thread = threading.Thread(target=lib.ruta_recolecta, args=(["acción1", "acción2"],))
+            thread.start()
+
+        threading.Thread(target=cuenta_regresiva).start()
 
 if __name__ == "__main__":
     root = tk.Tk()

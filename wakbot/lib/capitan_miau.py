@@ -22,21 +22,20 @@ def abrir_ventana():
     boton_cerrar = tk.Button(ventana, text="Cerrar", command=cerrar_ventana)
     boton_cerrar.place(relx=0.5, rely=0.5, anchor="center")
     ventana.mainloop()
-    contar()
+    
+
 
 
 ###################
 # funcion principal de CapitanMiau
 ###################
 
-def CapitanMiau(imagen,direccion_final):
-    
-    CapitanMiau=pyautogui.locateOnScreen(imagen,confidence=0.5,region=(0,400,800,600))
-    #print("capitan Miau?")
+def CapitanMiau(imagen, direccion_final, root):
+    CapitanMiau = pyautogui.locateOnScreen(imagen, confidence=0.5, region=(0, 400, 800, 600))
     if CapitanMiau is None:
-        #print("no era el capitan")
         pass
     else:
         send_telegram_msg("<b>!capitanmiau</b>")
-        abrir_ventana()
+        root.after(0,abrir_ventana())
+        contar()
         pyautogui.moveTo(direccion_final)
