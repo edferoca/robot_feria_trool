@@ -2,7 +2,7 @@ from .base import*
 from .comunication import *
 import pyautogui, time
 
-__all__=[]
+__all__=['recorrido_leñador']
 
 def ruta_simebra_arboles():
     sembrado_seguro("izquierda")

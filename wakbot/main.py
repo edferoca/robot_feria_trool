@@ -10,4 +10,4 @@ def contar_hasta(n):
 
 if __name__ == "__main__":
     contar_hasta(5)
-    lib.recorrido_leñador()
+    lib.recorrido_espanto()
