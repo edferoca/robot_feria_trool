@@ -272,11 +272,11 @@ corta_o_tala=[corta_arbol_recurso,tala_recurso]
 
 
 """
-"""
+
 
 print('inicia la siembra')
-ruta_siembra()
-#ruta_simebra_arboles()
+#ruta_siembra()
+ruta_simebra_arboles()
 
 
   
@@ -289,9 +289,9 @@ time.sleep(600)
 bot.send_message(906440079,"recolecta iniciada")
 
 print('inicia la recolecta')
-ruta_recolecta(reco_y_tala)
-
-#ruta_recolecta_arboles(corta_o_tala)
+#ruta_recolecta(reco_y_tala)
+"""
+ruta_recolecta_arboles(corta_o_tala)
 
 for i in range(3):
     pyautogui.click(direcciones.get('derecha'),button='left')
