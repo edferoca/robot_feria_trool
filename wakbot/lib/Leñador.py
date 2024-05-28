@@ -80,7 +80,7 @@ def recorrido_leñador(siembra =True,recolecta = True):
         print('recolecta iniciada')
         ruta_recolecta_arboles(corta_o_tala)
         for i in range(17):
-            pyautogui.click(direcciones.get('atras'),button='left')
+            pyautogui.click(direcciones.get('adelante'),button='left')
             time.sleep(1) 
         send_telegram_msg("recolecta terminada")
 
