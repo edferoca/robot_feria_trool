@@ -1,4 +1,4 @@
-from comunication import *
+from .comunication import *
 import tkinter as tk
 import pyautogui,time
 
