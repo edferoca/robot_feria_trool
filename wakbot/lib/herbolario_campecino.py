@@ -18,7 +18,7 @@ def ruta_siembra():
         sembrado_seguro("atras")
         sembrado_seguro("izquierda")
         time.sleep(2) 
-        pyautogui.click(direcciones.get("izquierda"),button='left')
+        pyautogui.click(direcciones.get("derecha"),button='left')
         time.sleep(2) 
     for i in range(16):
         sembrado_seguro("derecha")
@@ -28,7 +28,7 @@ def ruta_siembra():
         pyautogui.click(direcciones.get("adelante"),button='left')
         time.sleep(2)
     for i in range(3):
-        pyautogui.click(direcciones.get('derecha'),button='left')
+        pyautogui.click(direcciones.get('izquierda'),button='left')
         time.sleep(1) 
 
 
@@ -51,7 +51,7 @@ def ruta_recolecta(accion):
         ejecutar_accion("izquierda",accion[0])
         ejecutar_accion("izquierda",accion[1])
         time.sleep(2) 
-        pyautogui.click(direcciones.get("izquierda"),button='left')
+        pyautogui.click(direcciones.get("derecha"),button='left')
         time.sleep(2) 
     for i in range(16):
         ejecutar_accion("derecha",accion[0])
