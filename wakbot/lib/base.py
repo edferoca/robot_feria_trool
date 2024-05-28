@@ -8,7 +8,7 @@ los siguietnes archivos
 """
 import pyautogui, time
 import time
-import capitan_miau as CM
+from .capitan_miau import CapitanMiau
 
 __all__=['sembrado_seguro','ejecutar_accion','direcciones','imagenes']
 
@@ -103,7 +103,7 @@ def ejecutar_accion(direccion, accion):
                 # tiempo de espera para recolectar
                 time.sleep(5)
                 # reviso si aparece el capitan miau
-                CM.CapitanMiau(imagenes.get("capitanMiau_img"),direcciones.get('centro'))
+                CapitanMiau(imagenes.get("capitanMiau_img"),direcciones.get('centro'))
                 break
         else:
             continue
