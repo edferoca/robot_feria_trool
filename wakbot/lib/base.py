@@ -26,12 +26,12 @@ direcciones ={
     "izquierda2":[484,263]
 }
 imagenes={
-    'mano_recojida':  "../img\seleccion.png",
-    'tijera_recurso': "../img\calar.png",
-    'segar_recurso': "../img/segar.png",
-    'talar_recurso': "../img\calar2.png",
-    'siembraSegura' : "../img\siembra_segura.png",
-    'capitanMiau_img': "../img\capitan_miau_3.png"
+    'mano_recojida':  "..\img\seleccion.png",
+    'tijera_recurso': "..\img\calar.png",
+    'segar_recurso': "..\img/segar.png",
+    'talar_recurso': "..\img\calar2.png",
+    'siembraSegura' : "..\img\siembra_segura.png",
+    'capitanMiau_img': "..\img\capitan_miau_3.png"
 }
 
 
