@@ -35,22 +35,22 @@ def ruta_simebra_arboles():
     sembrado_seguro("izquierda")
     sembrado_seguro("derecha")
     
-def ruta_recolecta_arboles(accion):
+def ruta_recolecta_arboles(accion,root):
     for i in range(17):
-        ejecutar_accion("derecha",accion[0])
-        ejecutar_accion("izquierda",accion[0])
+        ejecutar_accion("derecha",accion[0],root)
+        ejecutar_accion("izquierda",accion[0],root)
         time.sleep(1) 
         pyautogui.click(direcciones.get("atras"),button='left')
         time.sleep(2) 
     #print("1")
-    ejecutar_accion("derecha",accion[0])   
+    ejecutar_accion("derecha",accion[0],root)   
     #sube 2 casillas
     pyautogui.click(direcciones.get('izquierda'),button='left')
     time.sleep(1) 
     pyautogui.click(direcciones.get("adelante"),button='left')
     time.sleep(1) 
     for i in range(17):
-        ejecutar_accion("izquierda",accion[0])
+        ejecutar_accion("izquierda",accion[0],root)
         time.sleep(1) 
         pyautogui.click(direcciones.get("adelante"),button='left')
         time.sleep(2) 
@@ -60,13 +60,13 @@ def ruta_recolecta_arboles(accion):
     pyautogui.click(direcciones.get('izquierda'),button='left')
     time.sleep(1) 
     for i in range(17):
-        ejecutar_accion("izquierda",accion[1])
-        ejecutar_accion("izquierda",accion[1])
+        ejecutar_accion("izquierda",accion[1],root)
+        ejecutar_accion("izquierda",accion[1],root)
         time.sleep(1) 
         pyautogui.click(direcciones.get("atras"),button='left')
         time.sleep(2) 
         
-def recorrido_leñador(siembra =True,recolecta = True):
+def recorrido_leñador(raiz, siembra =True,recolecta = True):
     send_telegram_msg("siembra iniciada")
     corta_o_tala=[imagenes.get('talar_recurso'),imagenes.get('tijera_recurso')]
     if siembra==True:
@@ -78,7 +78,7 @@ def recorrido_leñador(siembra =True,recolecta = True):
     if recolecta == True:
         send_telegram_msg("recolecta iniciada")
         print('recolecta iniciada')
-        ruta_recolecta_arboles(corta_o_tala)
+        ruta_recolecta_arboles(corta_o_tala,raiz)
         for i in range(17):
             pyautogui.click(direcciones.get('adelante'),button='left')
             time.sleep(1) 

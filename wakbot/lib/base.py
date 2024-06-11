@@ -50,8 +50,8 @@ en una celda especifica (direccion)
 def sembrado_seguro(direccion):
     sembrado = False
     while not sembrado:
-        for offset_x in range(-3, 4):  # Cambiado de -3, 3 a -3, 4
-            for offset_y in range(-1, 2):  # Cambiado de -1, 1 a -1, 2
+        for offset_x in range(-3, 3):  # Cambiado de -3, 3 a -3, 4
+            for offset_y in range(-1, 1):  # Cambiado de -1, 1 a -1, 2
                 pyautogui.click(direcciones.get(direccion)[0] + offset_x, 
                                 direcciones.get(direccion)[1] + offset_y, 
                                 button='right')
@@ -83,7 +83,7 @@ y de la celda requerida (direccion)
 def ejecutar_accion(direccion, accion,root):
         
     # Realizar clicks en los pixeles circundantes para activar la acción
-    for offset_y in range(-3, 3):
+    for offset_y in range(-3, 2):
         for offset_x in range(-1, 1):
             
             pyautogui.click(direcciones.get(direccion)[0] + offset_x, 

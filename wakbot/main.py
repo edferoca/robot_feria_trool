@@ -1,4 +1,4 @@
-#import lib
+import lib
 import time
 import tkinter as tk
 from tkinter import ttk
@@ -77,17 +77,24 @@ class App:
                 self.menu_desplegable_parametro("Tijera o Segar", ["Tijera", "Segar"], self.param1_var)
                 self.crear_checkbox_parametro("Siembra", self.param2_var)
                 self.crear_checkbox_parametro("Recolecta", self.param3_var)
+            if funcion == " Leñador":
+                self.param1Leñador_var = tk.BooleanVar()
+                self.param2Leñador_var = tk.BooleanVar()
+                self.crear_checkbox_parametro("Siembra", self.param1Leñador_var)
+                self.crear_checkbox_parametro("Recolecta", self.param2Leñador_var)
+                
+                
 
             self.ejecutar_btn = tk.Button(frame, text="Ejecutar", command=self.iniciar_ejecucion)
             self.ejecutar_btn.pack(pady=15)
     
     def menu_desplegable_parametro(self, label_text, opciones, variable):
         def actualizar_parametro(event):
-            if variable.get() == "Tijera":
+            seleccion = menu.get()
+            if seleccion == "Tijera":
                 variable.set(True)
             else:
                 variable.set(False)
-
         frame = tk.Frame(self.parametros_frame)
         frame.pack(pady=2)
         label = tk.Label(frame, text=label_text)
@@ -133,20 +140,20 @@ class App:
                 param1 = self.param1_var.get()
                 param2 = self.param2_var.get()
                 param3 = self.param3_var.get()
-                thread = threading.Thread(target=recorrido_herb_camp, args=(root,param1, param2, param3,))
+                print(f' herbOcamp? = {param1}')
+                thread = threading.Thread(target=lib.recorrido_herb_camp, args=(root,param1, param2, param3,))
             elif funcion == " Leñador":
-                thread = threading.Thread(target=ruta_siembra)
+                paramleñador1 = self.param1Leñador_var.get()
+                paramleñador2 = self.param2Leñador_var.get()
+                
+                thread = threading.Thread(target=lib.recorrido_leñador,args=(root,paramleñador1,paramleñador2))
             elif funcion == " Pocimas espanto":
                 thread = threading.Thread(target=ruta_recolecta, args=(["acción1", "acción2"],))
             thread.start()
 
         threading.Thread(target=cuenta_regresiva).start()
 
-def recorrido_herb_camp(root,param1, param2, param3, ):
-    print(f'aqui iria una funcion: {param1}, {param2}, {param3}')
-    
-def ruta_siembra():
-    print(f'ahola')
+
 def ruta_recolecta():
     print(f'adios')
 

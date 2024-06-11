@@ -65,11 +65,11 @@ def ruta_recolecta(accion,root):
         time.sleep(2)
 
 
-def recorrido_herb_camp(raiz,tijeraOsegar_selector = True,siembra =True,recolecta =True,  ):
+def recorrido_herb_camp(raiz,tijeraOsegar_selector = True,siembra =True,recolecta =True  ):
     send_telegram_msg("siembra iniciada")
     #si  tijeraOsegar_selector = True se seleccionan las tijeras
-    tijeraOsegar = imagenes.get('tijera_recurso') if tijeraOsegar_selector == True else  imagenes.get('segar_recurso')
-    reco_y_tala=[imagenes.get('mano_recojida'),tijeraOsegar]
+    herOcamp = imagenes.get('tijera_recurso') if tijeraOsegar_selector == True else  imagenes.get('segar_recurso')
+    reco_y_tala=[imagenes.get('mano_recojida'),herOcamp]
     if siembra==True:
         print('inicia la siembra')
         ruta_siembra()
