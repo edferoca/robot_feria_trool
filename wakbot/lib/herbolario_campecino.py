@@ -3,6 +3,14 @@ from .comunication import *
 import pyautogui, time
 
 __all__ = ['recorrido_herb_camp']
+
+"""
+recorrido siembra herbolario y campecino:
+
+----->------>----->---->---->Fin
+|
+<-----<-----<-----<----<-----X
+"""
 def ruta_siembra():
     #siembra recorriendo de derecha a izquierda 
     for i in range(16):
@@ -18,7 +26,7 @@ def ruta_siembra():
         sembrado_seguro("atras")
         sembrado_seguro("izquierda")
         time.sleep(2) 
-        pyautogui.click(direcciones.get("derecha"),button='left')
+        pyautogui.click(direcciones.get("izquierda"),button='left')
         time.sleep(2) 
     for i in range(16):
         sembrado_seguro("derecha")
@@ -28,10 +36,16 @@ def ruta_siembra():
         pyautogui.click(direcciones.get("adelante"),button='left')
         time.sleep(2)
     for i in range(3):
-        pyautogui.click(direcciones.get('izquierda'),button='left')
+        pyautogui.click(direcciones.get('derecha'),button='left')
         time.sleep(1) 
 
+"""
+recorrido recolecta herbolario y campecino:
 
+----->------>----->---->---->Fin
+|
+<-----<-----<-----<----<-----X
+"""
 def ruta_recolecta(accion,root):
     for i in range(16):
         ejecutar_accion("derecha",accion[0],root)
@@ -51,7 +65,7 @@ def ruta_recolecta(accion,root):
         ejecutar_accion("izquierda",accion[0],root)
         ejecutar_accion("izquierda",accion[1],root)
         time.sleep(2) 
-        pyautogui.click(direcciones.get("derecha"),button='left')
+        pyautogui.click(direcciones.get("izquierda"),button='left')
         time.sleep(2) 
     for i in range(16):
         ejecutar_accion("derecha",accion[0],root)
