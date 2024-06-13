@@ -148,14 +148,12 @@ class App:
                 
                 thread = threading.Thread(target=lib.recorrido_leñador,args=(root,paramleñador1,paramleñador2))
             elif funcion == " Pocimas espanto":
-                thread = threading.Thread(target=ruta_recolecta, args=(["acción1", "acción2"],))
+                thread = threading.Thread(target=lib.recorrido_espanto, args=(["acción1", "acción2"],))
             thread.start()
 
         threading.Thread(target=cuenta_regresiva).start()
 
 
-def ruta_recolecta():
-    print(f'adios')
 
 if __name__ == "__main__":
     root = tk.Tk()

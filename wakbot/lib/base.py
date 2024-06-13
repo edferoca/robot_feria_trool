@@ -50,23 +50,24 @@ en una celda especifica (direccion)
 def sembrado_seguro(direccion):
     sembrado = False
     while not sembrado:
-        for offset_x in range(-3, 3):  # Cambiado de -3, 3 a -3, 4
-            for offset_y in range(-1, 1):  # Cambiado de -1, 1 a -1, 2
+        for offset_x in range(-3, 3):  
+            for offset_y in range(-1, 1):  
+                pyautogui.click(direcciones.get(direccion)[0] + offset_x, 
+                                direcciones.get(direccion)[1] + offset_y, 
+                                button='right')
+                time.sleep(0.5)  # Aumentado el tiempo de espera
                 pyautogui.click(direcciones.get(direccion)[0] + offset_x, 
                                 direcciones.get(direccion)[1] + offset_y, 
                                 button='right')
                 time.sleep(1)  # Aumentado el tiempo de espera
-                pyautogui.click(direcciones.get(direccion)[0] + offset_x, 
-                                direcciones.get(direccion)[1] + offset_y, 
-                                button='right')
-                time.sleep(1.5)  # Aumentado el tiempo de espera
-                confirmacion = pyautogui.locateOnScreen(imagenes.get("siembraSegura"), confidence=0.7, region=(0, 0, 800, 600))
+                confirmacion = pyautogui.locateOnScreen(imagenes.get("siembraSegura"), confidence=0.6, region=(0, 0, 800, 600))
                 time.sleep(0.8)  # Aumentado el tiempo de espera
+                #si None: intenta sembrar, de lo contrario ya hay algo sembrado alli
                 if confirmacion is None:
                     pyautogui.press('3')
-                    time.sleep(1.2)  # Aumentado el tiempo de espera
+                    time.sleep(1)  # tiempo de espera de accion frfente al servidor wakfu
                     pyautogui.click(direcciones.get(direccion), button='left')
-                    time.sleep(3.5)  # Aumentado el tiempo de espera
+                    time.sleep(3)  # tiempo de espera mientras seimbra
                 else:
                     sembrado = True
                     break
@@ -89,22 +90,22 @@ def ejecutar_accion(direccion, accion,root):
             pyautogui.click(direcciones.get(direccion)[0] + offset_x, 
                             direcciones.get(direccion)[1] + offset_y, 
                             button='right')
-           # print(f'hola{direcciones.get(direccion)[0] + offset_x},{direcciones.get(direccion)[1] + offset_y}')
             time.sleep(1)
             # buscar la accion a realizar
             confirmacion = pyautogui.locateOnScreen(accion, confidence=0.8, region=(0, 0, 520, 370)) #800, 600 
             time.sleep(0.8)
             # si la accion esta disponible la ejecutara, si no, pues pasa
-            if confirmacion is None:
-                
+            if confirmacion is None:   
                 pass
             else:
                 confirmacion_pos = pyautogui.center(confirmacion)
                 # mueve el mouse al lugar de la accion y le ejecuta
                 pyautogui.moveTo(confirmacion_pos)
                 pyautogui.click(button='left')
-                # tiempo de espera para recolectar
-                time.sleep(5)
+                # tiempo de espera para recolectar 2.8 seg es el mayor tiempo de recoleccion 
+                time.sleep(2.8)
+                #tiempo de espera para ver si aparece el capitan miau
+                time.sleep(1.5)
                 # reviso si aparece el capitan miau
                 CapitanMiau(imagenes.get("capitanMiau_img"),direcciones.get('centro'),root)
                 break
