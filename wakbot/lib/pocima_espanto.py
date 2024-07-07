@@ -4,7 +4,7 @@ __all__=['recorrido_espanto']
 
 def cabar():
     time.sleep(0.4)
-    palita=pyautogui.locateOnScreen('pala.png',confidence=0.8,region=(0,0,794,558))
+    palita=pyautogui.locateOnScreen('img\pala.png',confidence=0.8,region=(0,0,794,558))
     if palita is None:
         pass
     else:
@@ -19,7 +19,7 @@ def recorrido_espanto(vueltas=80):
         while 1:
             pyautogui.click(x=200,y=200,button='right')
             time.sleep(0.5)
-            manita=pyautogui.locateOnScreen('entrada2.png',confidence=0.9,region=(0,0,794,558))
+            manita=pyautogui.locateOnScreen('img\entrada2.png',confidence=0.9,region=(0,0,794,558))
             if manita is None:
                 pass
             else:
@@ -30,11 +30,11 @@ def recorrido_espanto(vueltas=80):
         pyautogui.moveTo(401,310,5)
         pyautogui.click(x=422,y=281,button='right')
         time.sleep(0.6)
-        cerrojo=pyautogui.locateOnScreen('candado.png',confidence=0.9,region=(0,0,794,558))
+        cerrojo=pyautogui.locateOnScreen('img\candado.png',confidence=0.9,region=(0,0,794,558))
         if cerrojo is None:
             pyautogui.click(354,285,button='right')#izq
             time.sleep(0.5)
-            manita=pyautogui.locateOnScreen('entrada2.png',confidence=0.9,region=(0,0,794,558))
+            manita=pyautogui.locateOnScreen('img\entrada2.png',confidence=0.9,region=(0,0,794,558))
             if manita is None:
                 pass
             else:
