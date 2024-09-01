@@ -29,12 +29,12 @@ direcciones ={
 #como las img seran usados en un scripten la carpeta principal
 #no es necesario el ../ para que el main pueda hubicarlo
 imagenes={
-    'mano_recojida':  "img\seleccion.png",
-    'tijera_recurso': "img\calar.png",
+    'mano_recojida':  "img\seleccion_100interfas.png",
+    'tijera_recurso': "img\calar_100interfas.png",
     'segar_recurso': "img/segar.png",
     'talar_recurso': "img\calar2.png",
-    'siembraSegura' : "img/siembra_segura.png",
-    'capitanMiau_img': "img\capitan_miau_3.png"
+    'siembraSegura' : "img/siembra_segura_100interfas.png",
+    'capitanMiau_img': "img\capitan_miau__100interfas.png"
 }
 
 
