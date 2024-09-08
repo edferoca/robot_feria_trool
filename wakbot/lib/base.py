@@ -30,11 +30,11 @@ direcciones ={
 #no es necesario el ../ para que el main pueda hubicarlo
 imagenes={
     'mano_recojida':  "img\seleccion_100interfas.png",
-    'tijera_recurso': "img\calar_100interfas.png",
+    'tijera_recurso': "img\pinza_100interfas.png",
     'segar_recurso': "img/segar.png",
     'talar_recurso': "img\calar2.png",
     'siembraSegura' : "img/siembra_segura_100interfas.png",
-    'capitanMiau_img': "img\capitan_miau__100interfas.png"
+    'capitanMiau_img': "img\capitan_miau_100interfas.png"
 }
 
 
@@ -60,7 +60,7 @@ def sembrado_seguro(direccion):
                                 direcciones.get(direccion)[1] + offset_y, 
                                 button='right')
                 time.sleep(1)  # Aumentado el tiempo de espera
-                confirmacion = pyautogui.locateOnScreen(imagenes.get("siembraSegura"), confidence=0.6, region=(0, 0, 800, 600))
+                confirmacion = pyautogui.locateOnScreen(imagenes.get("siembraSegura"), confidence=0.6, region=(270, 170, 470, 450))
                 time.sleep(0.8)  # Aumentado el tiempo de espera
                 #si None: intenta sembrar, de lo contrario ya hay algo sembrado alli
                 if confirmacion is None:
@@ -92,7 +92,7 @@ def ejecutar_accion(direccion, accion,root):
                             button='right')
             time.sleep(1)
             # buscar la accion a realizar
-            confirmacion = pyautogui.locateOnScreen(accion, confidence=0.8, region=(0, 0, 520, 370)) #800, 600 
+            confirmacion = pyautogui.locateOnScreen(accion, confidence=0.9, region=(0, 0, 520, 370)) #800, 600 
             time.sleep(0.8)
             # si la accion esta disponible la ejecutara, si no, pues pasa
             if confirmacion is None:   

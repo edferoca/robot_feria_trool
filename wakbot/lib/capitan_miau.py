@@ -35,7 +35,7 @@ def iniciar_conteo(ventana):
 def capture_screen_region(left, top, width, height):
     # Determinar la ruta de guardado relativa al archivo actual
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    destination_folder = os.path.join(current_dir, '..', 'img_IA')   
+    destination_folder = os.path.join(current_dir, os.pardir, 'img_IA')  
     # Buscar el siguiente número disponible para nombrar la imagen
     existing_files = os.listdir(destination_folder)
     existing_numbers = [int(f.split('.')[0]) for f in existing_files if f.split('.')[0].isdigit()]
@@ -62,6 +62,7 @@ def CapitanMiau(imagen, direccion_final, root):
         pyautogui.click(600,500,button='left')
         capture_screen_region(0,0,600,800)
         send_telegram_msg("<b>!capitanmiau</b>")
+        print("!capitanmiau")
         abrir_ventana()
         root.after(5000, lambda: pyautogui.moveTo(direccion_final))
         
