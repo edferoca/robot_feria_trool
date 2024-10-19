@@ -34,7 +34,7 @@ imagenes={
     'segar_recurso': "img/segar.png",
     'talar_recurso': "img\calar2.png",
     'siembraSegura' : "img/siembra_segura_100interfas.png",
-    'capitanMiau_img': "img\capitan_miau_100interfas.png"
+    'capitanMiau_img': "img/capitan_miau_100interfas.png"
 }
 
 

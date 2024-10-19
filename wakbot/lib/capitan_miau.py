@@ -55,7 +55,9 @@ def capture_screen_region(left, top, width, height):
 ###################
 
 def CapitanMiau(imagen, direccion_final, root):
-    CapitanMiau = pyautogui.locateOnScreen(imagen, confidence=0.5, region=(0, 400, 800, 600))
+    CapitanMiau = pyautogui.locateOnScreen(imagen, confidence=0.7, region=(0, 400, 800, 600))
+    time.sleep(0.1)
+    CapitanMiau = pyautogui.locateOnScreen(imagen, confidence=0.7, region=(0, 400, 800, 600))
     if CapitanMiau is None:
         pass
     else:
