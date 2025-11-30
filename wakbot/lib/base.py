@@ -84,8 +84,8 @@ y de la celda requerida (direccion)
 def ejecutar_accion(direccion, accion,root):
         
     # Realizar clicks en los pixeles circundantes para activar la acción
-    for offset_y in range(-3, 2):
-        for offset_x in range(-1, 1):
+    for offset_y in range(2, -4, -1):
+        for offset_x in range(0, -2, -1):
             
             pyautogui.click(direcciones.get(direccion)[0] + offset_x, 
                             direcciones.get(direccion)[1] + offset_y, 

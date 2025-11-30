@@ -55,16 +55,26 @@ def capture_screen_region(left, top, width, height):
 ###################
 
 def CapitanMiau(imagen, direccion_final, root):
-    CapitanMiau = pyautogui.locateOnScreen(imagen, confidence=0.7, region=(0, 400, 800, 600))
-    time.sleep(0.1)
-    CapitanMiau = pyautogui.locateOnScreen(imagen, confidence=0.7, region=(0, 400, 800, 600))
-    if CapitanMiau is None:
-        pass
-    else:
-        pyautogui.click(600,500,button='left')
-        capture_screen_region(0,0,600,800)
-        send_telegram_msg("<b>!capitanmiau</b>")
-        print("!capitanmiau")
-        abrir_ventana()
-        root.after(5000, lambda: pyautogui.moveTo(direccion_final))
+    start_time = time.time()
+    while True:
+        CapitanMiau = pyautogui.locateOnScreen(imagen, confidence=0.85, region=(0, 500, 900, 700))
+        time.sleep(0.1)
+        CapitanMiau = pyautogui.locateOnScreen(imagen, confidence=0.85, region=(0, 500, 900, 700))
+        if CapitanMiau : 
+            print(f"✅ Imagen encontrada en {CapitanMiau}")
+            pyautogui.click(600,500,button='left')
+            send_telegram_msg("<b>!capitanmiau</b>")
+            print("!capitanmiau")
+            pyautogui.click(425,543,button='left')
+            time.sleep(3)
+            capture_screen_region(0,0,600,800)
+            abrir_ventana()
+            root.after(5000, lambda: pyautogui.moveTo(direccion_final))
+            break
+        else:
+            pass
+        if time.time() - start_time > 2:
+            print("⏹ Finalizando búsqueda después de 2.5 segundos.")
+            break
+            
         
