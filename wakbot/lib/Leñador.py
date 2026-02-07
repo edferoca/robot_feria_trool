@@ -12,7 +12,12 @@ def click_fuerte(posicion, button='left'):
     pyautogui.mouseDown(button=button)
     time.sleep(0.05)
     pyautogui.mouseUp(button=button)
-
+"""
+-----<------<-----<----<-----X
+|
+|
+>----->----->----->---->---->fin
+"""
 def ruta_simebra_arboles():
     sembrado_seguro("izquierda")
     time.sleep(2) 

@@ -41,8 +41,13 @@ def capture_screen_region(left, top, width, height):
     existing_numbers = [int(f.split('.')[0]) for f in existing_files if f.split('.')[0].isdigit()]
     next_number = max(existing_numbers) + 1 if existing_numbers else 1
     output_path = os.path.join(destination_folder, f'{next_number}.png')
+    #preparar la region para capturar la imagen
+    for zoom in range(1,13,1):
+        pyautogui.press('subtract')
+    pyautogui.hotkey('ctrl', 'shift', 'space')
     # Capturar la región de la pantalla
     screenshot = pyautogui.screenshot(region=(left, top, width, height))
+    pyautogui.hotkey('ctrl', 'shift', 'space')
     # Guardar la imagen
     screenshot.save(output_path)
     print(f"Imagen guardada en: {output_path}")
@@ -62,19 +67,21 @@ def CapitanMiau(imagen, direccion_final, root):
         CapitanMiau = pyautogui.locateOnScreen(imagen, confidence=0.85, region=(0, 500, 900, 700))
         if CapitanMiau : 
             print(f"✅ Imagen encontrada en {CapitanMiau}")
-            pyautogui.click(600,500,button='left')
+            time.sleep(1.2)
+            pyautogui.click(755,560,button='left')
+            time.sleep(0.3)
+            pyautogui.click(755,560,button='left')
+            time.sleep(3)
+            capture_screen_region(0,0,800,600)
             send_telegram_msg("<b>!capitanmiau</b>")
             print("!capitanmiau")
-            pyautogui.click(425,543,button='left')
-            time.sleep(3)
-            capture_screen_region(0,0,600,800)
             abrir_ventana()
             root.after(5000, lambda: pyautogui.moveTo(direccion_final))
             break
         else:
             pass
         if time.time() - start_time > 2:
-            print("⏹ Finalizando búsqueda después de 2.5 segundos.")
+            
             break
             
         

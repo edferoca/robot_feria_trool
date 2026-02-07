@@ -15,15 +15,15 @@ __all__=['sembrado_seguro','ejecutar_accion','direcciones','imagenes']
 
 #base variables for the diferents works
 direcciones ={
-    "centro":[400,307],
-    "adelante":[442,329],#"adelante":[442,329],
-    "adelante2" : [484,351], #para no tener obstaculos
-    "atras":[358,285],
-    "atras2":[316,263],
-    "derecha":[358,329],
-    "derecha2" : [316,351],
-    "izquierda":[442,285], #"izquierda":[442,285],
-    "izquierda2":[484,263]
+    "centro":[400,305],
+    "adelante":[495,355],#"adelante":[442,329],
+    "adelante2" : [590,405], #para no tener obstaculos
+    "atras":[305,255],
+    "atras2":[210,200],
+    "derecha":[310,355],
+    "derecha2" :[215,410] ,
+    "izquierda":[495,255], #"izquierda":[442,285],
+    "izquierda2":[590,200]
 }
 
 #como las img seran usados en un scripten la carpeta principal
@@ -31,8 +31,8 @@ direcciones ={
 imagenes={
     'mano_recojida':  "img\seleccion_100interfas.png",
     'tijera_recurso': "img\pinza_100interfas.png",
-    'segar_recurso': "img/segar.png",
-    'talar_recurso': "img\calar2.png",
+    'segar_recurso': "img/segar_100interfas.png",
+    'talar_recurso': "img/hacha_100interfas.png",
     'siembraSegura' : "img/siembra_segura_100interfas.png",
     'capitanMiau_img': "img/capitan_miau_100interfas.png"
 }
@@ -53,17 +53,19 @@ def sembrado_seguro(direccion):
         for offset_x in range(-3, 3):  
             for offset_y in range(-1, 1):  
                 pyautogui.click(direcciones.get(direccion)[0] + offset_x, 
-                                direcciones.get(direccion)[1] + offset_y, 
+                                direcciones.get(direccion)[1]+10 + offset_y, 
                                 button='right')
                 time.sleep(0.5)  # Aumentado el tiempo de espera
                 pyautogui.click(direcciones.get(direccion)[0] + offset_x, 
-                                direcciones.get(direccion)[1] + offset_y, 
+                                direcciones.get(direccion)[1]+10 + offset_y, 
                                 button='right')
                 time.sleep(1)  # Aumentado el tiempo de espera
-                confirmacion = pyautogui.locateOnScreen(imagenes.get("siembraSegura"), confidence=0.6, region=(270, 170, 470, 450))
+                
+                confirmacion = pyautogui.locateOnScreen(imagenes.get("siembraSegura"), confidence=0.8, region=(150, 150, 600, 600))
                 time.sleep(0.8)  # Aumentado el tiempo de espera
                 #si None: intenta sembrar, de lo contrario ya hay algo sembrado alli
                 if confirmacion is None:
+                    #print(f'hola {offset_x}')
                     pyautogui.press('3')
                     time.sleep(1)  # tiempo de espera de accion frfente al servidor wakfu
                     pyautogui.click(direcciones.get(direccion), button='left')
@@ -88,11 +90,11 @@ def ejecutar_accion(direccion, accion,root):
         for offset_x in range(0, -2, -1):
             
             pyautogui.click(direcciones.get(direccion)[0] + offset_x, 
-                            direcciones.get(direccion)[1] + offset_y, 
+                            direcciones.get(direccion)[1] -15 + offset_y, 
                             button='right')
             time.sleep(1)
             # buscar la accion a realizar
-            confirmacion = pyautogui.locateOnScreen(accion, confidence=0.9, region=(0, 0, 520, 370)) #800, 600 
+            confirmacion = pyautogui.locateOnScreen(accion, confidence=0.9, region=(0, 0, 680, 370)) #800, 600 
             time.sleep(0.8)
             # si la accion esta disponible la ejecutara, si no, pues pasa
             if confirmacion is None:   

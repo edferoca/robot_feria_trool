@@ -89,7 +89,7 @@ def recorrido_herb_camp(raiz,tijeraOsegar_selector = True,siembra =True,recolect
         ruta_siembra()
         print('esperar a que cresca algo')
         send_telegram_msg("siembra terminada, esperando ... ")
-        time.sleep(150) 
+        time.sleep(20) #150 para servidores normales
     if recolecta == True: 
         send_telegram_msg("recolecta iniciada")
         print('recolecta iniciada')
